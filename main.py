@@ -1,4 +1,5 @@
 import requests
+import datetime
 
 TOKEN = "qw21341dsf"
 USERNAME = "user123qwerty"
@@ -36,11 +37,14 @@ headers = {
 # requests.post(url=graph_endpoint, json=graph_config, headers=headers)
 # print(response.text)
 
+today = datetime.now()
+
 tracker_update = {
-    "date": "20230607",
+    "date": today.strftime("Y%Y%m%d"),
     "quantity": "55"
 }
 
 #This updates a specific point on the graph
 response = requests.post(url=graph_endpoint + GRAPH_ID, json=tracker_update, headers=headers)
 print(response.text)
+
