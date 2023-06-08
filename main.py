@@ -44,7 +44,29 @@ tracker_update = {
     "quantity": "55"
 }
 
-#This updates a specific point on the graph
-response = requests.post(url=graph_endpoint + GRAPH_ID, json=tracker_update, headers=headers)
-print(response.text)
+pixel_endpoint = graph_endpoint + "/" + GRAPH_ID
 
+#This updates a specific point on the graph
+# response = requests.post(url=pixel_endpoint, json=tracker_update, headers=headers)
+# print(response.text)
+
+update_endpoint = pixel_endpoint + "/" + today.strftime("Y%Y%m%d")
+
+new_pixel_data = {
+    "minutes" : "60"
+}
+
+#Changing a pixel
+response = requests.put(url=update_endpoint, json=new_pixel_data, headers=headers)
+print(response)
+
+#Deleting a pixel
+delete_endpoint = pixel_endpoint + "/" + today.strftime("Y%Y%m%d")
+
+new_pixel_data = {
+    "minutes" : "60"
+}
+
+#Changing a pixel
+response = requests.put(url=delete_endpoint, json=new_pixel_data, headers=headers)
+print(response)
